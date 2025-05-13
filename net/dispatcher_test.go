@@ -405,7 +405,7 @@ func TestDispatcherSendRequest(t *testing.T) {
 		require.Equal(t, "POST", r.Method)
 		require.Equal(t, "application/json", r.Header.Get("Content-Type"))
 		require.Equal(t, "test-hmac", r.Header.Get("X-Signature"))
-		require.Equal(t, "test-key", r.Header.Get("X-Convoy-Idempotency-Key"))
+		require.Equal(t, "test-key", r.Header.Get("X-IDEMPOTENCY-KEY"))
 
 		w.WriteHeader(http.StatusOK)
 		_, _ = w.Write([]byte(`{"status": "success"}`))

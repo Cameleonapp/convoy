@@ -319,7 +319,7 @@ func (d *Dispatcher) SendWebhook(ctx context.Context, endpoint string, jsonData 
 	req.Header.Set("Accept-Encoding", "gzip")
 	req.Header.Add("User-Agent", defaultUserAgent())
 	if len(idempotencyKey) > 0 {
-		req.Header.Set("X-Convoy-Idempotency-Key", idempotencyKey)
+		req.Header.Set("X-IDEMPOTENCY-KEY", idempotencyKey)
 	}
 
 	header := httpheader.HTTPHeader(req.Header)
@@ -358,7 +358,8 @@ func updateDispatchHeaders(r *Response, res *http.Response) {
 }
 
 func defaultUserAgent() string {
-	return "Convoy/" + convoy.GetVersion()
+	//return "Convoy/" + convoy.GetVersion()
+    return "Webhook/Sonatel";
 }
 
 func (d *Dispatcher) do(ctx context.Context, req *http.Request, res *Response, maxResponseSize int64) error {
